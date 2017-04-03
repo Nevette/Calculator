@@ -18,7 +18,7 @@ public class Calculator extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	JButton button = new JButton();
-	JTextArea display = new JTextArea();
+	Display display = new Display();
 	Double zmienna = null;
 	Character znak = null;
 	
@@ -31,87 +31,39 @@ public class Calculator extends JFrame{
 		
 		setResizable(false);
 		
-		display.setEditable(false);
-		display.setSize(280, 50);
-		display.setLocation(3, 3);
-		display.setBackground(Color.lightGray);
-		
-		
-		Font czcionka = new Font("Calibri",Font.PLAIN,16);
-		display.setFont(czcionka);
-		display.setForeground(Color.white);
-		display.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-		
 		
 		JPanel pane = new JPanel(new GridBagLayout());
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
 		pane.setBackground(Color.BLACK);
 		
-		zwrocGuzik(pane,"7", 0, 0, zwrocAkcjeNumeryczna(7));
-		zwrocGuzik(pane,"8", 1, 0, zwrocAkcjeNumeryczna(8));
-		zwrocGuzik(pane,"9", 2, 0, zwrocAkcjeNumeryczna(9));
-		zwrocGuzik(pane,"%", 3, 0, zwrocAkcjeProcent());
-		zwrocGuzikWiekszy(pane,"C", 4, 0, zwrocAkcjeKasowania());
+		new Button(pane,"7", 0, 0, zwrocAkcjeNumeryczna(7));
+		new Button(pane,"8", 1, 0, zwrocAkcjeNumeryczna(8));
+		new Button(pane,"9", 2, 0, zwrocAkcjeNumeryczna(9));
+		new Button(pane,"%", 3, 0, zwrocAkcjeProcent());
+		new ButtonWiekszy(pane,"C", 4, 0, zwrocAkcjeKasowania());
 		
-		zwrocGuzik(pane,"4", 0, 1, zwrocAkcjeNumeryczna(4));
-		zwrocGuzik(pane,"5", 1, 1, zwrocAkcjeNumeryczna(5));
-		zwrocGuzik(pane,"6", 2, 1, zwrocAkcjeNumeryczna(6));
-		zwrocGuzik(pane,"/", 3, 1, zwrocAkcjeDzielenia());
+		new Button(pane,"4", 0, 1, zwrocAkcjeNumeryczna(4));
+		new Button(pane,"5", 1, 1, zwrocAkcjeNumeryczna(5));
+		new Button(pane,"6", 2, 1, zwrocAkcjeNumeryczna(6));
+		new Button(pane,"/", 3, 1, zwrocAkcjeDzielenia());
 		
-		zwrocGuzik(pane,"1", 0, 2, zwrocAkcjeNumeryczna(1));
-		zwrocGuzik(pane,"2", 1, 2, zwrocAkcjeNumeryczna(2));
-		zwrocGuzik(pane,"3", 2, 2, zwrocAkcjeNumeryczna(3));
-		zwrocGuzik(pane,"*", 3, 2, zwrocAkcjeMnozenia());
+		new Button(pane,"1", 0, 2, zwrocAkcjeNumeryczna(1));
+		new Button(pane,"2", 1, 2, zwrocAkcjeNumeryczna(2));
+		new Button(pane,"3", 2, 2, zwrocAkcjeNumeryczna(3));
+		new Button(pane,"*", 3, 2, zwrocAkcjeMnozenia());
 		
-		zwrocGuzik(pane,",", 0, 3, zwrocAkcjePrzecinka());
-		zwrocGuzik(pane,"0", 1, 3, zwrocAkcjeNumeryczna(0));
-		zwrocGuzik(pane,"+", 2, 3, zwrocAkcjeDodawania());
-		zwrocGuzik(pane,"-", 3, 3, zwrocAkcjeOdejmowania());
+		new Button(pane,",", 0, 3, zwrocAkcjePrzecinka());
+		new Button(pane,"0", 1, 3, zwrocAkcjeNumeryczna(0));
+		new Button(pane,"+", 2, 3, zwrocAkcjeDodawania());
+		new Button(pane,"-", 3, 3, zwrocAkcjeOdejmowania());
 	
-		zwrocGuzikWiekszy(pane,"=", 4, 2, zwrocAkcjeRownania());
-	
+		new ButtonWiekszy(pane,"=", 4, 2, zwrocAkcjeRownania());
 		
 		this.getContentPane().add(display);
 		this.getContentPane().add(pane);
 		
 		setVisible(true);
-	}
-	
-	private void zwrocGuzik(JPanel rodzic, String etykieta, int kolumna, int wiersz, ActionListener akcjaGuzika) 
-	{
-		JButton przycisk = new JButton(etykieta);
-		przycisk.setMaximumSize(new Dimension(100,120));
-		GridBagConstraints parametry = new GridBagConstraints();
-		parametry.gridx = kolumna;
-		parametry.gridy = wiersz;
-		przycisk.setPreferredSize(new Dimension(50,35));
-		Font czcionka = new Font("Calibri", Font.BOLD ,15);
-		przycisk.setFont(czcionka);
-		parametry.insets = new Insets(2, 2, 2, 2);
-		rodzic.add(przycisk, parametry);
-		przycisk.addActionListener(akcjaGuzika);
-		przycisk.setBackground(Color.lightGray);
-	}
-	
-	private void zwrocGuzikWiekszy(JPanel rodzic, String etykieta, int kolumna, int wiersz, ActionListener akcjaGuzika) 
-	{
-		JButton przycisk = new JButton(etykieta);
-		przycisk.setMaximumSize(new Dimension(100,120));
-		GridBagConstraints parametry = new GridBagConstraints();
-		parametry.gridx = kolumna;
-		parametry.gridy = wiersz;
-		parametry.gridwidth = 1;
-		parametry.gridheight = 2;
-		przycisk.setPreferredSize(new Dimension(50,74));
-		Font czcionka = new Font("Calibri", Font.BOLD ,15);
-		przycisk.setFont(czcionka);
-		przycisk.setForeground(Color.white);
-		parametry.insets = new Insets(2, 2, 2, 2);
-		rodzic.add(przycisk, parametry);
-		przycisk.addActionListener(akcjaGuzika);
-		Color kolor = new Color(6,5,4);
-		przycisk.setBackground(kolor);
 	}
 	
 	
